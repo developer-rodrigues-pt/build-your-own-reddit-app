@@ -14,3 +14,25 @@ const searchCommunity = async term => {
 
     return communities;
 };
+
+const searchPost = async term => {
+    let posts = [];
+
+    const response = await fetch(`https://reddit.com/search.json?q=${term}&type=link`);
+    const json = await response.json();
+
+    posts = json.data.children.map(({ data }) => ({
+        community_icon: '',
+        subreddit: data.subreddit,
+        author: data.author,
+        created: data.created,
+        title: data.title,
+        thumbnail: data.thumbnail,
+        ups: data.ups,
+        num_comments: data.num_comments,
+        total_awards_received: data.total_awards_received,
+        permalink: data.permalink
+    }));
+
+    return posts;
+};
