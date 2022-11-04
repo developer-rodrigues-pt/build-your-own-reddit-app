@@ -36,3 +36,21 @@ const searchPost = async term => {
 
     return posts;
 };
+
+const searchUser = async term => {
+    let users = [];
+
+    const response = await fetch(`https://reddit.com/users/search.json?q=${term}`);
+    const json = await response.json();
+
+    users = json.data.children.map(({ data }) => ({
+        name: data.name,
+        comment_karma: data.comments_karma,
+        link_karma: data.link_karma,
+        icon_img: data.icon_img,
+        public_description: data.subreddit.public_description,
+        url: data.subreddit.url
+    }));
+
+    return users;
+};
