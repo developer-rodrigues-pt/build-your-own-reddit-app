@@ -22,6 +22,7 @@ const searchPost = async term => {
     const json = await response.json();
 
     posts = json.data.children.map(({ data }) => ({
+        id: id,
         community_icon: '',
         subreddit: data.subreddit,
         author: data.author,
@@ -54,3 +55,24 @@ const searchUser = async term => {
 
     return users;
 };
+
+const getPostComments = async article => {
+    let comments = [];
+
+    const response = await fetch(`https://reddit.com/comments/${article}.json`);
+    const json = await response.json();
+
+    comments = json[1].data.children.map(({ data }) => 
+        extractCommentData(data));
+
+    return comments;
+};
+
+const extractCommentData = data => ({
+    icon_img: '',
+    author: data.author,
+    created: data.created,
+    body: data.body,
+    ups: data.ups,
+    replies: data.replies.data.children.map(({data}) => extractCommentData(data))
+});
