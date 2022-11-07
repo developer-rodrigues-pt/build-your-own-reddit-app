@@ -74,5 +74,28 @@ const extractCommentData = data => ({
     created: data.created,
     body: data.body,
     ups: data.ups,
+    permalink: data.permalink,
     replies: data.replies.data.children.map(({data}) => extractCommentData(data))
 });
+
+const getPopularPosts = async () => {
+    let posts = [];
+
+    const response = await fetch('https://reddit.com/hot.json');
+    const json = await response.json();
+
+    posts = json.data.children.map(({ data }) => ({
+        id: id,
+        community_icon: '',
+        subreddit: data.subreddit,
+        author: data.author,
+        created: data.created,
+        title: data.title,
+        thumbnail: data.thumbnail,
+        ups: data.ups,
+        num_comments: data.num_comments,
+        permalink: data.permalink
+    }));
+
+    return posts;
+};
