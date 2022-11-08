@@ -1,52 +1,95 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  background-color: #DAE0E6;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* post */
+
+.post {
+  width: 600px;
+  border-radius: 3px;
+  background-color: white;
+  padding: 10px 50px;
+  margin-bottom: 1rem;
+  min-height: 12rem;
 }
 
-.App {
-  text-align: center;
+.post header,
+.post header > div,
+.post footer {
+  background: inherit !important;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.post header > div {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  column-gap: 5px;
 }
 
-.App-link {
-  color: #61dafb;
+/* author image */
+
+.author_image img {
+  border-radius: 130px !important;
+  width: 33px;
+  height: 33px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
+.author_image {
+  border-radius: 130px !important;
+  width: 33px;
+  height: 33px;
+  display: none;
+}
+
+/* author and created */
+
+.author_and_created {
+  height: 1rem;
+  min-width: 160px;
+}
+
+/* title */
+
+.title {
+  margin: 0;
+  min-height: 2rem;
+}
+
+/* body */
+
+.body {
+  margin-top: .5rem;
+  margin-bottom: 1rem;
+  min-height: 5rem;
+}
+
+/* ups, comments, and share */
+
+.ups_comments_and_share {
+  height: 1rem;
+  display: inline-block;
+  margin: 0;
+  min-width: 12rem;
+}
+
+/* post (loading) */
+
+.loading * {
+  /* background-color: #F6F7F8; */
+  background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
+  background-size: 200% 100%;
+  animation: 1.5s shine linear infinite;
+}
+
+.loading .author_image img {
+  display: none;
+}
+
+.loading .author_image {
+  display: inline-block;
+}
+
+@keyframes shine {
   to {
-    transform: rotate(360deg);
+      background-position-x: -200%;
   }
 }

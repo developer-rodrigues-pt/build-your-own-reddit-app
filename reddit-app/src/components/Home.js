@@ -1,9 +1,9 @@
+import Post from "../features/posts/Post";
+
 const Home = (props) => {
     return (
-        <div>
-            Hello, world!
-        </div>
+        <Post />
     );
 };
 
-export default Homepage;
+export default Home;
