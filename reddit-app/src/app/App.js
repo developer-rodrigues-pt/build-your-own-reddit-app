@@ -1,14 +1,15 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import Home from '../components/Home';
-// import logo from '../logo.svg';
-import '../index.css';
+import {
+  BrowserRouter as Router,
+  Route
+} from 'react-router-dom';
+import PopularPostsPreviews from '../features/popularPostsPreviews/PopularPostsPreviews';
 
 function App() {
   return (
     <Router>
       <Route path="/">
-        <Home />
+        <PopularPostsPreviews />
       </Route>
     </Router>
   );

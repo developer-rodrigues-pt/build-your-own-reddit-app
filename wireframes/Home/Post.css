@@ -25,24 +25,24 @@ body {
     column-gap: 5px;
 }
 
-/* author image */
+/* community icon */
 
-.author_image img {
+.community_icon img {
     border-radius: 130px !important;
     width: 33px;
     height: 33px;
 }
 
-.author_image {
+.community_icon {
     border-radius: 130px !important;
     width: 33px;
     height: 33px;
     display: none;
 }
 
-/* author and created */
+/* subreddit and created by */
 
-.author_and_created {
+.subreddit_and_created_by {
     height: 1rem;
     min-width: 160px;
 }
@@ -80,11 +80,11 @@ body {
     animation: 1.5s shine linear infinite;
 }
 
-.loading .author_image img {
+.loading .community_icon img {
     display: none;
 }
 
-.loading .author_image {
+.loading .community_icon {
     display: inline-block;
 }
 

@@ -71,6 +71,16 @@ body {
   min-width: 12rem;
 }
 
+/* post - body content - link */
+
+.post .link {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+  display: inline-block;
+}
+
 /* post (loading) */
 
 .loading * {

@@ -1,7 +1,7 @@
 const searchCommunity = async term => {
     let communities = [];
 
-    const response = await fetch(`https://reddit.com/search.json?q=${term}&type=sr`);
+    const response = await fetch(`https://www.reddit.com/search.json?q=${term}&type=sr`);
     const json = await response.json();
 
     communities = json.data.children.map(({ data }) => ({
@@ -18,11 +18,11 @@ const searchCommunity = async term => {
 const searchPost = async term => {
     let posts = [];
 
-    const response = await fetch(`https://reddit.com/search.json?q=${term}&type=link`);
+    const response = await fetch(`https://www.reddit.com/search.json?q=${term}&type=link`);
     const json = await response.json();
 
     posts = json.data.children.map(({ data }) => ({
-        id: id,
+        id: data.id,
         community_icon: '',
         subreddit: data.subreddit,
         author: data.author,
@@ -41,7 +41,7 @@ const searchPost = async term => {
 const searchUser = async term => {
     let users = [];
 
-    const response = await fetch(`https://reddit.com/users/search.json?q=${term}`);
+    const response = await fetch(`https://www.reddit.com/users/search.json?q=${term}`);
     const json = await response.json();
 
     users = json.data.children.map(({ data }) => ({
@@ -59,7 +59,7 @@ const searchUser = async term => {
 const getPostComments = async article => {
     let comments = [];
 
-    const response = await fetch(`https://reddit.com/comments/${article}.json`);
+    const response = await fetch(`https://www.reddit.com/comments/${article}.json`);
     const json = await response.json();
 
     comments = json[1].data.children.map(({ data }) => 
@@ -78,19 +78,43 @@ const extractCommentData = data => ({
     replies: data.replies.data.children.map(({data}) => extractCommentData(data))
 });
 
-const getPopularPosts = async () => {
+const extractPopularPostBodyContent = (popularPost) => {
+    let type;
+    let url;
+
+    if (popularPost.is_video) {
+        type = 'video';
+        url = popularPost.media.reddit_video.fallback_url;
+    } else if (popularPost.post_hint === 'image') {
+        type = 'image';
+        const indexResolution = Math.min(3, popularPost.preview.images[0].resolutions.length - 1);
+        url = replaceAmp(popularPost.preview.images[0].resolutions[indexResolution].url);
+    } else if (popularPost.post_hint === 'link') {
+        type = 'link';
+        url = popularPost.url;
+    } else if (popularPost.is_self) {
+        type = 'self';
+    }
+
+    return { type, url };
+};
+
+const replaceAmp = (url) => url.replaceAll('&amp;', '&');
+
+export const getPopularPosts = async () => {
     let posts = [];
 
-    const response = await fetch('https://reddit.com/hot.json');
+    const response = await fetch('https://www.reddit.com/hot.json');
     const json = await response.json();
 
     posts = json.data.children.map(({ data }) => ({
-        id: id,
+        id: data.id,
         community_icon: '',
         subreddit: data.subreddit,
         author: data.author,
         created: data.created,
         title: data.title,
+        bodyContent: extractPopularPostBodyContent(data),
         thumbnail: data.thumbnail,
         ups: data.ups,
         num_comments: data.num_comments,
