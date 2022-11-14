@@ -35,6 +35,6 @@ export const popularPostsPreviewsSlice = createSlice({
 
 export const selectAllPreviews = (state) => state.popularPostsPreviews.popularPosts;
 
-export const isLoading = (state) => state.popularPostsPreviews.isLoading;
+export const isLoading = (state) => state.popularPostsPreviews.isLoadingPopularPosts;
 
 export default popularPostsPreviewsSlice.reducer;

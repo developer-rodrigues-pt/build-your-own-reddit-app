@@ -7,6 +7,7 @@ const searchCommunity = async term => {
     communities = json.data.children.map(({ data }) => ({
         community_icon: data.community_icon,
         display_name: data.display_name,
+        display_name_prefixed: data.display_name_prefixed,
         subscribers: data.subscribers,
         public_description: data.public_description,
         url: data.url
@@ -25,6 +26,7 @@ const searchPost = async term => {
         id: data.id,
         community_icon: '',
         subreddit: data.subreddit,
+        subreddit_name_prefixed: data.subreddit_name_prefixed,
         author: data.author,
         created: data.created,
         title: data.title,
@@ -94,6 +96,9 @@ const extractPopularPostBodyContent = (popularPost) => {
         url = popularPost.url;
     } else if (popularPost.is_self) {
         type = 'self';
+    } else if (popularPost.secure_media) {
+        type = 'media_embed';
+        url = popularPost.secure_media.oembed.thumbnail_url;
     }
 
     return { type, url };
@@ -111,6 +116,7 @@ export const getPopularPosts = async () => {
         id: data.id,
         community_icon: '',
         subreddit: data.subreddit,
+        subreddit_name_prefixed: data.subreddit_name_prefixed,
         author: data.author,
         created: data.created,
         title: data.title,

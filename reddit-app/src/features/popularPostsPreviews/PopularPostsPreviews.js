@@ -5,7 +5,7 @@ import {
     selectAllPreviews,
     isLoading
 } from './popularPostsPreviewsSlice';
-import PopularPostListItem from '../../components/PopularPostListItem';
+import PopularPostListItem, { PopularPostListItemPlaceholder } from '../../components/PopularPostListItem';
 
 const PopularPostsPreviews = () => {
     const dispatch = useDispatch();
@@ -13,22 +13,25 @@ const PopularPostsPreviews = () => {
     const isLoadingPreviews = useSelector(isLoading);
 
     useEffect(() => {
-        dispatch(loadAllPreviews())
+        dispatch(loadAllPreviews());
     }, [dispatch]);
-
-    if (isLoadingPreviews) {
-        return <div>loading state</div>;
-    }
 
     return (
         <>
             <section className="popularPosts-container">
                 <h2 className="section-title">Popular posts</h2>
-                {popularPostsPreviews.map((popularPost) => (
+                {!isLoadingPreviews ? popularPostsPreviews.map((popularPost) => (
                     <div key={popularPost.id}>
                         <PopularPostListItem popularPost={popularPost} />
                     </div>
-                ))}
+                )) :
+                (
+                    <>
+                        <PopularPostListItemPlaceholder />
+                        <PopularPostListItemPlaceholder />
+                        <PopularPostListItemPlaceholder />
+                    </>
+                )}
             </section>
         </>
     );
