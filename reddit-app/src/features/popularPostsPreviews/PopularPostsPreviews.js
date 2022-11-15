@@ -6,6 +6,7 @@ import {
     isLoading
 } from './popularPostsPreviewsSlice';
 import PopularPostListItem, { PopularPostListItemPlaceholder } from '../../components/PopularPostListItem';
+import { Heading } from '../../components/Heading';
 
 const PopularPostsPreviews = () => {
     const dispatch = useDispatch();
@@ -18,6 +19,7 @@ const PopularPostsPreviews = () => {
 
     return (
         <>
+            <Heading />
             <section className="popularPosts-container">
                 <h2 className="section-title">Popular posts</h2>
                 {!isLoadingPreviews ? popularPostsPreviews.map((popularPost) => (

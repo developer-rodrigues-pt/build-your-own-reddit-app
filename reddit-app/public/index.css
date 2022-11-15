@@ -10,6 +10,64 @@ body {
   font-family: sans-serif;
 }
 
+/* heading */
+
+#root > header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  column-gap: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: white;
+}
+
+#root > header img {
+  width: auto;
+  height: 60px;
+  flex-shrink: 0;
+}
+
+.search-container {
+  padding: 14px 22px;
+  background-color: var(--background-alternative);
+  border-radius: 36px;
+  height: 20px;
+  flex-grow: 1;
+}
+
+.search-container input[type="text"] {
+  color: var(--text-alternative);
+  font-size: 1rem;
+  background-color: transparent;
+  border: 0;
+  width: 100%;
+}
+
+.search-container input[type="text"]:focus-visible {
+  outline: 0;
+}
+
+#root > header input[type="button"] {
+  background-color: var(--background-alternative);
+  border-radius: 11px;
+  border: 0;
+  font-size: 1rem;
+  padding: 14px 22px;
+  height: 48px;
+  flex-shrink: 0;
+}
+
+/* popular posts */
+
+.popularPosts-container {
+  margin-top: 200px;
+}
+
 /* post */
 
 .post {

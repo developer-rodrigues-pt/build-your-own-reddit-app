@@ -5,6 +5,8 @@
     --text-alternative: #8E8C93;
 }
 
+/* heading */
+
 header {
     position: fixed;
     top: 0;
@@ -37,6 +39,7 @@ header img {
     font-size: 1rem;
     background-color: transparent;
     border: 0;
+    width: 100%;
 }
 
 .search-container input[type="text"]:focus-visible {
