@@ -1,5 +1,12 @@
+/* global variables */
+:root {
+  --background: #DAE0E6;
+  --background-alternative: #F6F7F8;
+  --text-alternative: #8E8C93;
+}
+
 body {
-  background-color: #DAE0E6;
+  background-color: var(--page-background);
   font-family: sans-serif;
 }
 
@@ -55,7 +62,7 @@ body {
 .created_by {
   font-weight: 600;
   font-size: 0.75rem;
-  color: #8E8C93;
+  color: var(--text-alternative);
 }
 
 /* title */
@@ -90,6 +97,7 @@ body {
   display: inline-block;
   margin: 0;
   min-width: 12rem;
+  color: var(--text-alternative);
 }
 
 .ups_comments_and_share > * {
@@ -123,7 +131,6 @@ body {
 /* post (loading) */
 
 .loading * {
-  /* background-color: #F6F7F8; */
   background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
   background-size: 200% 100%;
   animation: 1.5s shine linear infinite;
