@@ -1,0 +1,214 @@
+/* global variables */
+:root {
+  --background: #DAE0E6;
+  --background-alternative: #F6F7F8;
+  --text-alternative: #8E8C93;
+}
+
+body {
+  background-color: var(--page-background);
+  font-family: sans-serif;
+}
+
+/* heading */
+
+#root > header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  column-gap: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: white;
+}
+
+#root > header img {
+  width: auto;
+  height: 60px;
+  flex-shrink: 0;
+}
+
+.search-container {
+  padding: 14px 22px;
+  background-color: var(--background-alternative);
+  border-radius: 36px;
+  height: 20px;
+  flex-grow: 1;
+}
+
+.search-container input[type="text"] {
+  color: var(--text-alternative);
+  font-size: 1rem;
+  background-color: transparent;
+  border: 0;
+  width: 100%;
+}
+
+.search-container input[type="text"]:focus-visible {
+  outline: 0;
+}
+
+#root > header input[type="button"] {
+  background-color: var(--background-alternative);
+  border-radius: 11px;
+  border: 0;
+  font-size: 1rem;
+  padding: 14px 22px;
+  height: 48px;
+  flex-shrink: 0;
+}
+
+/* popular posts */
+
+.popularPosts-container {
+  margin-top: 200px;
+}
+
+/* post */
+
+.post {
+  width: 600px;
+  border-radius: 3px;
+  background-color: white;
+  padding: 10px 50px;
+  margin-bottom: 1rem;
+  min-height: 12rem;
+}
+
+.post header,
+.post header > div,
+.post footer {
+  background: inherit !important;
+}
+
+.post header > div {
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
+}
+
+/* community icon */
+
+.community_icon img {
+  border-radius: 130px !important;
+  width: 33px;
+  height: 33px;
+}
+
+.community_icon {
+  border-radius: 130px !important;
+  width: 33px;
+  height: 33px;
+}
+
+/* subreddit and created by */
+
+.subreddit_and_created_by {
+  height: 1rem;
+  min-width: 160px;
+}
+
+.subreddit {
+  font-weight: 600;
+  font-size: 0.75rem;
+}
+
+.created_by {
+  font-weight: 600;
+  font-size: 0.75rem;
+  color: var(--text-alternative);
+}
+
+/* title */
+
+.title {
+  margin: 0;
+  min-height: 2rem;
+}
+
+/* body */
+
+.body {
+  margin-top: .5rem;
+  margin-bottom: 1rem;
+  min-height: 5rem;
+}
+
+/* body content - link */
+
+.link {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+}
+
+/* ups, comments, and share */
+
+.ups_comments_and_share {
+  height: 1rem;
+  display: inline-block;
+  margin: 0;
+  min-width: 12rem;
+  color: var(--text-alternative);
+}
+
+.ups_comments_and_share > * {
+  margin-right: 1rem;
+}
+
+.ups_comments_and_share a {
+  text-decoration: none;
+}
+
+.ups {
+  font-weight: 600;
+}
+
+.comments::before {
+  content: url('./comments.svg');
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  margin-right: 5px;
+}
+
+.share::before {
+  content: url('./share.svg');
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  margin-right: 5px;
+}
+
+/* post (loading) */
+
+.loading * {
+  background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
+  background-size: 200% 100%;
+  animation: 1.5s shine linear infinite;
+}
+
+.loading .community_icon img {
+  display: none;
+}
+
+.loading .community_icon {
+  display: inline-block;
+}
+
+.loading .comments::before,
+.loading .share::before {
+  display: none;
+}
+
+@keyframes shine {
+  to {
+      background-position-x: -200%;
+  }
+}

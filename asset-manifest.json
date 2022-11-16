@@ -1,0 +1,10 @@
+{
+  "files": {
+    "main.js": "/build-your-own-reddit-app/static/js/main.ca059171.js",
+    "index.html": "/build-your-own-reddit-app/index.html",
+    "main.ca059171.js.map": "/build-your-own-reddit-app/static/js/main.ca059171.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.ca059171.js"
+  ]
+}
