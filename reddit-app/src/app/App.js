@@ -1,16 +1,25 @@
 import React from 'react';
 import {
   BrowserRouter as Router,
-  Route
+  Route,
+  Switch
 } from 'react-router-dom';
+import Heading from '../components/Heading';
 import PopularPostsPreviews from '../features/popularPostsPreviews/PopularPostsPreviews';
+import SearchPosts from '../features/searchPosts/SearchPosts';
 
 function App() {
   return (
     <Router>
-      <Route path="/">
-        <PopularPostsPreviews />
-      </Route>
+      <Heading />
+      <Switch>
+        <Route path="/search">
+          <SearchPosts />
+        </Route>
+        <Route path="/">
+          <PopularPostsPreviews />
+        </Route>
+      </Switch>
     </Router>
   );
 }

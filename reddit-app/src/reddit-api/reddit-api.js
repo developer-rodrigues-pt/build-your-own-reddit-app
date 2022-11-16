@@ -16,7 +16,7 @@ const searchCommunity = async term => {
     return communities;
 };
 
-const searchPost = async term => {
+export const searchPost = async term => {
     let posts = [];
 
     const response = await fetch(`https://www.reddit.com/search.json?q=${term}&type=link`);
@@ -30,6 +30,7 @@ const searchPost = async term => {
         author: data.author,
         created: data.created,
         title: data.title,
+        bodyContent: extractPopularPostBodyContent(data),
         thumbnail: data.thumbnail,
         ups: data.ups,
         num_comments: data.num_comments,
