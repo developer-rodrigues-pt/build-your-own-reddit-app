@@ -10,7 +10,7 @@ import SearchPosts from '../features/searchPosts/SearchPosts';
 
 function App() {
   return (
-    <Router>
+    <Router basename="/build-your-own-reddit-app">
       <Heading />
       <Switch>
         <Route path="/search">
