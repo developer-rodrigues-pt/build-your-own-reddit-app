@@ -212,3 +212,9 @@ body {
       background-position-x: -200%;
   }
 }
+
+/* search posts */
+
+.searchPosts-container {
+  margin-top: 200px;
+}

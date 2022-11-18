@@ -11,7 +11,7 @@ export default function PopularPostListItem({ popularPost }) {
             <header>
                 <div role="presentation">
                     <div className="community_icon">
-                        <img src="./letter-r.png"
+                        <img src="/build-your-own-reddit-app/letter-r.png"
                              alt="community icon" />
                     </div>
                     <p className="subreddit_and_created_by">

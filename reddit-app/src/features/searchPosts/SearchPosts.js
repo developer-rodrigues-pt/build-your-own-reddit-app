@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
     loadSearchPosts,
@@ -9,15 +10,15 @@ import PopularPostListItem, { PopularPostListItemPlaceholder } from "../../compo
 // TODO: SearchPostListItem and SearchPostListItemPlaceholder
 
 const SearchPosts = () => {
+    const { term } = useParams();
+
     const dispatch = useDispatch();
     const searchPosts = useSelector(selectAllPosts);
     const isLoadingPosts = useSelector(isLoadingSearchPosts);
 
-    const term = 'Portugal'; // TODO: const term = useSelector(select...)
-
     useEffect(() => {
         dispatch(loadSearchPosts(term));
-    }, [term]);
+    }, [dispatch, term]);
 
     return (
         <>

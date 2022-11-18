@@ -13,7 +13,7 @@ function App() {
     <Router basename="/build-your-own-reddit-app">
       <Heading />
       <Switch>
-        <Route path="/search">
+        <Route path="/search/:term">
           <SearchPosts />
         </Route>
         <Route path="/">
