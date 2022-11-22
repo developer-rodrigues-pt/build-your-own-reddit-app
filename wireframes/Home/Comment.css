@@ -1,0 +1,76 @@
+/* global variables */
+:root {
+    --background: #DAE0E6;
+    --background-alternative: #F6F7F8;
+    --text-alternative: #8E8C93;
+}
+
+body {
+    background-color: var(--page-background);
+    font-family: sans-serif;
+}
+
+/* post comments container */
+
+.comments-container ul {
+    list-style: none;
+}
+
+.comments-container ul li {
+    border-image: linear-gradient(to top, var(--background-alternative) 58%, transparent 58%) 1;
+    border-width: 0 0 0 2px;
+    border-style: solid;
+}
+
+/* comment */
+
+article.comment {
+    padding: 0 1rem;
+}
+
+.comment header {
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+    position: relative;
+    left: -38px;
+}
+
+/* author and created */
+
+.author_and_created {
+    margin: 0;
+}
+
+/* author image */
+
+.author_image img {
+    border-radius: 130px !important;
+    width: 33px;
+    height: 33px;
+}
+  
+.author_image {
+    border-radius: 130px !important;
+    width: 33px;
+    height: 33px;
+}
+
+/* author */
+
+.author {
+    font-weight: 600;
+    font-size: 0.75rem;
+}
+
+.created {
+    font-weight: 600;
+    font-size: 0.75rem;
+    color: var(--text-alternative);
+}
+
+/* ups */
+
+.ups {
+    font-weight: 600;
+}
