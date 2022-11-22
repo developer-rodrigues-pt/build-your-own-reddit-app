@@ -60,6 +60,15 @@ body {
   padding: 14px 22px;
   height: 48px;
   flex-shrink: 0;
+  flex-basis: 100px;
+}
+
+#root > header input[type="button"]:hover {
+  border: 2px solid gray;
+}
+
+#root > header input[type="button"]:active {
+  border: 2px solid black;
 }
 
 /* popular posts */
