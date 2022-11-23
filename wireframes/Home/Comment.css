@@ -12,14 +12,16 @@ body {
 
 /* post comments container */
 
+.comments-container {
+    border-top: 2px solid var(--background-alternative);
+}
+
 .comments-container ul {
     list-style: none;
 }
 
 .comments-container ul li {
-    border-image: linear-gradient(to top, var(--background-alternative) 58%, transparent 58%) 1;
-    border-width: 0 0 0 2px;
-    border-style: solid;
+    border-left: 2px solid var(--background-alternative);
 }
 
 /* comment */

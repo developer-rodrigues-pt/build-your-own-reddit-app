@@ -1,5 +1,5 @@
 import React from 'react';
-import { get_time_diff_simplified, nFormatter } from '../util/util';
+import { get_time_diff_simplified, nFormatter, removeHttpsWWW } from '../util/util';
 
 export default function PopularPostListItem({ popularPost }) {
     let created_by = ` . Posted by u/${popularPost.author} ${get_time_diff_simplified(popularPost.created)} ago`;
@@ -96,5 +96,3 @@ const generatePopularPostBody = ({ type, url }) => {
     }
     return body;
 };
-
-const removeHttpsWWW = (url) => url.replace('https://', '').replace('www.', '');

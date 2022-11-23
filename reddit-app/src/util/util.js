@@ -72,3 +72,5 @@ export function nFormatter(num, digits) {
     });
     return item ? (num / item.value).toFixed(digits).replace(rx, "$1") + item.symbol : "0";
 }
+
+export const removeHttpsWWW = (url) => url.replace('https://', '').replace('www.', '');

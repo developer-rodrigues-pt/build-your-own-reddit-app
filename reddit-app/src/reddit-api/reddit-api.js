@@ -59,7 +59,7 @@ const searchUser = async term => {
     return users;
 };
 
-const getPostComments = async article => {
+export const getPostComments = async article => {
     let comments = [];
 
     const response = await fetch(`https://www.reddit.com/comments/${article}.json`);
@@ -72,6 +72,7 @@ const getPostComments = async article => {
 };
 
 const extractCommentData = data => ({
+    id: data.id,
     icon_img: '',
     author: data.author,
     created: data.created,
