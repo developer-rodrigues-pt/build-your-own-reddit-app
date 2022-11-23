@@ -24,6 +24,7 @@ body {
   width: 100%;
   box-sizing: border-box;
   background-color: white;
+  z-index: 2;
 }
 
 #root > header img {
@@ -60,6 +61,15 @@ body {
   padding: 14px 22px;
   height: 48px;
   flex-shrink: 0;
+  flex-basis: 100px;
+}
+
+#root > header input[type="button"]:hover {
+  border: 2px solid gray;
+}
+
+#root > header input[type="button"]:active {
+  border: 2px solid black;
 }
 
 /* popular posts */
@@ -217,4 +227,72 @@ body {
 
 .searchPosts-container {
   margin-top: 200px;
+}
+
+/* post comments container */
+
+.comments-container {
+  margin-top: 200px;
+  border-top: 2px solid var(--background-alternative);
+}
+
+.comments-container ul {
+  list-style: none;
+}
+
+.comments-container ul li {
+  border-left: 2px solid var(--background-alternative);
+}
+
+/* comment */
+
+article.comment {
+  padding: 0 1rem;
+}
+
+.comment header {
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
+  position: relative;
+  left: -38px;
+}
+
+/* author and created */
+
+.author_and_created {
+  margin: 0;
+}
+
+/* author image */
+
+.author_image img {
+  border-radius: 130px !important;
+  width: 33px;
+  height: 33px;
+}
+
+.author_image {
+  border-radius: 130px !important;
+  width: 33px;
+  height: 33px;
+}
+
+/* author */
+
+.author {
+  font-weight: 600;
+  font-size: 0.75rem;
+}
+
+.created {
+  font-weight: 600;
+  font-size: 0.75rem;
+  color: var(--text-alternative);
+}
+
+/* comment body */
+
+article.comment .body {
+  min-height: initial;
 }
