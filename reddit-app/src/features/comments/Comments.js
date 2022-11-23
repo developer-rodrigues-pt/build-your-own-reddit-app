@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import commentsSlice, {
+import {
     loadAllComments,
     selectAllComments,
     isLoadingComments
 } from "./commentsSlice";
 import CommentListItem from '../../components/CommentListItem';
 
-const Comments = ({article}) => {
+const Comments = ({article = 'xyqkef'}) => {
     const dispatch = useDispatch();
     const postComments = useSelector(selectAllComments);
     const isLoading = useSelector(isLoadingComments);
@@ -16,7 +16,11 @@ const Comments = ({article}) => {
         dispatch(loadAllComments(article));
     }, [dispatch, article]);
 
+    // @author: https://stackoverflow.com/a/46775494
     const constructCommentListItem = (comment) => {
+        if (!comment) {
+            return;
+        }
         if (comment.replies) {
             return (
                 <li key={comment.id}>
@@ -35,7 +39,6 @@ const Comments = ({article}) => {
         }
     };
 
-
     return (
         <>
             <section className="comments-container">
@@ -47,3 +50,5 @@ const Comments = ({article}) => {
         </>
     );
 };
+
+export default Comments;

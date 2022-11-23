@@ -79,7 +79,7 @@ const extractCommentData = data => ({
     body: data.body,
     ups: data.ups,
     permalink: data.permalink,
-    replies: data.replies.data.children.map(({data}) => extractCommentData(data))
+    replies: data.replies ? data.replies.data.children.map(({data, kind}) => kind === 't1' ? extractCommentData(data) : null) : []
 });
 
 const extractPopularPostBodyContent = (popularPost) => {
