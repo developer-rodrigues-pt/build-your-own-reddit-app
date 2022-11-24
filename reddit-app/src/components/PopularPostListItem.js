@@ -1,13 +1,21 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { get_time_diff_simplified, nFormatter, removeHttpsWWW } from '../util/util';
 
 export default function PopularPostListItem({ popularPost }) {
+    const history = useHistory();
+    
     let created_by = ` . Posted by u/${popularPost.author} ${get_time_diff_simplified(popularPost.created)} ago`;
     let body = popularPost.bodyContent ? generatePopularPostBody(popularPost.bodyContent) : '';
+    
+    const handleClick = () => {
+        history.push(`/posts/${popularPost.id}`);
+    };
 
     return (
         <article key={popularPost.id} 
-                 className="post">
+                 className="post"
+                 onClick={handleClick}>
             <header>
                 <div role="presentation">
                     <div className="community_icon">
