@@ -7,7 +7,8 @@ import {
 import Heading from '../components/Heading';
 import PopularPostsPreviews from '../features/popularPostsPreviews/PopularPostsPreviews';
 import SearchPosts from '../features/searchPosts/SearchPosts';
-import Comments from '../features/comments/Comments'; // FIXME: Post
+import Post from '../features/post/Post';
+import Comments from '../features/comments/Comments';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <SearchPosts />
         </Route>
         <Route path="/posts/:article">
+          <Post />
           <Comments />
         </Route>
         <Route path="/">

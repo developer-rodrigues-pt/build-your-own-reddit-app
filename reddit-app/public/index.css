@@ -75,7 +75,7 @@ body {
 /* popular posts */
 
 .popularPosts-container {
-  margin-top: 200px;
+  margin-top: 100px;
 }
 
 /* post */
@@ -226,13 +226,12 @@ body {
 /* search posts */
 
 .searchPosts-container {
-  margin-top: 200px;
+  margin-top: 100px;
 }
 
 /* post comments container */
 
 .comments-container {
-  margin-top: 200px;
   border-top: 2px solid var(--background-alternative);
 }
 
@@ -242,6 +241,12 @@ body {
 
 .comments-container ul li {
   border-left: 2px solid var(--background-alternative);
+}
+
+/* post */
+
+.post-container {
+  margin-top: 100px;
 }
 
 /* comment */

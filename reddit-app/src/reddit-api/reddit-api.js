@@ -1,19 +1,12 @@
-const searchCommunity = async term => {
-    let communities = [];
+export const getPopularPosts = async () => {
+    let posts = [];
 
-    const response = await fetch(`https://www.reddit.com/search.json?q=${term}&type=sr`);
+    const response = await fetch('https://www.reddit.com/hot.json');
     const json = await response.json();
 
-    communities = json.data.children.map(({ data }) => ({
-        community_icon: data.community_icon,
-        display_name: data.display_name,
-        display_name_prefixed: data.display_name_prefixed,
-        subscribers: data.subscribers,
-        public_description: data.public_description,
-        url: data.url
-    }));
+    posts = json.data.children.map(extractPostData);
 
-    return communities;
+    return posts;
 };
 
 export const searchPost = async term => {
@@ -22,41 +15,58 @@ export const searchPost = async term => {
     const response = await fetch(`https://www.reddit.com/search.json?q=${term}&type=link`);
     const json = await response.json();
 
-    posts = json.data.children.map(({ data }) => ({
-        id: data.id,
-        community_icon: '',
-        subreddit: data.subreddit,
-        subreddit_name_prefixed: data.subreddit_name_prefixed,
-        author: data.author,
-        created: data.created,
-        title: data.title,
-        bodyContent: extractPopularPostBodyContent(data),
-        thumbnail: data.thumbnail,
-        ups: data.ups,
-        num_comments: data.num_comments,
-        total_awards_received: data.total_awards_received,
-        permalink: data.permalink
-    }));
+    posts = json.data.children.map(extractPostData);
 
     return posts;
 };
 
-const searchUser = async term => {
-    let users = [];
-
-    const response = await fetch(`https://www.reddit.com/users/search.json?q=${term}`);
+export const getPost = async article => {
+    const response = await fetch(`https://www.reddit.com/${article}.json`);
     const json = await response.json();
 
-    users = json.data.children.map(({ data }) => ({
-        name: data.name,
-        comment_karma: data.comments_karma,
-        link_karma: data.link_karma,
-        icon_img: data.icon_img,
-        public_description: data.subreddit.public_description,
-        url: data.subreddit.url
-    }));
+    return extractPostData(json[0].data.children[0]);
+};
 
-    return users;
+const extractPostData = ({data}) => ({
+    id: data.id,
+    community_icon: '',
+    subreddit: data.subreddit,
+    subreddit_name_prefixed: data.subreddit_name_prefixed,
+    author: data.author,
+    created: data.created,
+    title: data.title,
+    bodyContent: extractPopularPostBodyContent(data),
+    thumbnail: data.thumbnail,
+    ups: data.ups,
+    num_comments: data.num_comments,
+    total_awards_received: data.total_awards_received,
+    permalink: data.permalink
+});
+
+const extractPopularPostBodyContent = (popularPost) => {
+    const replaceAmp = (url) => url.replaceAll('&amp;', '&');
+
+    let type;
+    let url;
+
+    if (popularPost.is_video) {
+        type = 'video';
+        url = popularPost.media.reddit_video.fallback_url;
+    } else if (popularPost.post_hint === 'image') {
+        type = 'image';
+        const indexResolution = Math.min(3, popularPost.preview.images[0].resolutions.length - 1);
+        url = replaceAmp(popularPost.preview.images[0].resolutions[indexResolution].url);
+    } else if (popularPost.post_hint === 'link') {
+        type = 'link';
+        url = popularPost.url;
+    } else if (popularPost.is_self) {
+        type = 'self';
+    } else if (popularPost.secure_media) {
+        type = 'media_embed';
+        url = popularPost.secure_media.oembed.thumbnail_url;
+    }
+
+    return { type, url };
 };
 
 export const getPostComments = async article => {
@@ -81,53 +91,3 @@ const extractCommentData = data => ({
     permalink: data.permalink,
     replies: data.replies ? data.replies.data.children.map(({data, kind}) => kind === 't1' ? extractCommentData(data) : null) : []
 });
-
-const extractPopularPostBodyContent = (popularPost) => {
-    let type;
-    let url;
-
-    if (popularPost.is_video) {
-        type = 'video';
-        url = popularPost.media.reddit_video.fallback_url;
-    } else if (popularPost.post_hint === 'image') {
-        type = 'image';
-        const indexResolution = Math.min(3, popularPost.preview.images[0].resolutions.length - 1);
-        url = replaceAmp(popularPost.preview.images[0].resolutions[indexResolution].url);
-    } else if (popularPost.post_hint === 'link') {
-        type = 'link';
-        url = popularPost.url;
-    } else if (popularPost.is_self) {
-        type = 'self';
-    } else if (popularPost.secure_media) {
-        type = 'media_embed';
-        url = popularPost.secure_media.oembed.thumbnail_url;
-    }
-
-    return { type, url };
-};
-
-const replaceAmp = (url) => url.replaceAll('&amp;', '&');
-
-export const getPopularPosts = async () => {
-    let posts = [];
-
-    const response = await fetch('https://www.reddit.com/hot.json');
-    const json = await response.json();
-
-    posts = json.data.children.map(({ data }) => ({
-        id: data.id,
-        community_icon: '',
-        subreddit: data.subreddit,
-        subreddit_name_prefixed: data.subreddit_name_prefixed,
-        author: data.author,
-        created: data.created,
-        title: data.title,
-        bodyContent: extractPopularPostBodyContent(data),
-        thumbnail: data.thumbnail,
-        ups: data.ups,
-        num_comments: data.num_comments,
-        permalink: data.permalink
-    }));
-
-    return posts;
-};

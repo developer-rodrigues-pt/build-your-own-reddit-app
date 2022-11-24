@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
     loadAllComments,
@@ -7,7 +8,9 @@ import {
 } from "./commentsSlice";
 import CommentListItem from '../../components/CommentListItem';
 
-const Comments = ({article = 'xyqkef'}) => {
+const Comments = () => {
+    const { article } = useParams();
+
     const dispatch = useDispatch();
     const postComments = useSelector(selectAllComments);
     const isLoading = useSelector(isLoadingComments);

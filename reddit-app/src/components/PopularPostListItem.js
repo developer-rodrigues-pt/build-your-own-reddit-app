@@ -3,7 +3,7 @@ import { get_time_diff_simplified, nFormatter, removeHttpsWWW } from '../util/ut
 
 export default function PopularPostListItem({ popularPost }) {
     let created_by = ` . Posted by u/${popularPost.author} ${get_time_diff_simplified(popularPost.created)} ago`;
-    let body = generatePopularPostBody(popularPost.bodyContent);
+    let body = popularPost.bodyContent ? generatePopularPostBody(popularPost.bodyContent) : '';
 
     return (
         <article key={popularPost.id} 
