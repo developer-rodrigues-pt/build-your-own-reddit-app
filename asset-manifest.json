@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/build-your-own-reddit-app/static/js/main.4dec2931.js",
+    "main.js": "/build-your-own-reddit-app/static/js/main.c99efa2b.js",
     "index.html": "/build-your-own-reddit-app/index.html",
-    "main.4dec2931.js.map": "/build-your-own-reddit-app/static/js/main.4dec2931.js.map"
+    "main.c99efa2b.js.map": "/build-your-own-reddit-app/static/js/main.c99efa2b.js.map"
   },
   "entrypoints": [
-    "static/js/main.4dec2931.js"
+    "static/js/main.c99efa2b.js"
   ]
 }
