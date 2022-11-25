@@ -1,7 +1,20 @@
+const ENDPOINTS = {
+    _base_url: 'https://www.reddit.com',
+    
+    _popular: () => '/hot.json',
+    _search_post: (term) => `/search.json?q=${term}&type=link`,
+    _get_post: (article) => `/${article}.json`,
+    _get_post_comments: (article) => `/comments/${article}.json`,
+
+    get: function (endpoint, ...values) {
+        return this._base_url + this[`_${endpoint}`](...values);
+    }
+};
+
 export const getPopularPosts = async () => {
     let posts = [];
 
-    const response = await fetch('https://www.reddit.com/hot.json');
+    const response = await fetch(ENDPOINTS.get('popular'));
     const json = await response.json();
 
     posts = json.data.children.map(extractPostData);
@@ -12,7 +25,7 @@ export const getPopularPosts = async () => {
 export const searchPost = async term => {
     let posts = [];
 
-    const response = await fetch(`https://www.reddit.com/search.json?q=${term}&type=link`);
+    const response = await fetch(ENDPOINTS.get('search_post', term));
     const json = await response.json();
 
     posts = json.data.children.map(extractPostData);
@@ -21,7 +34,7 @@ export const searchPost = async term => {
 };
 
 export const getPost = async article => {
-    const response = await fetch(`https://www.reddit.com/${article}.json`);
+    const response = await fetch(ENDPOINTS.get('get_post', article));
     const json = await response.json();
 
     return extractPostData(json[0].data.children[0]);
@@ -72,7 +85,7 @@ const extractPopularPostBodyContent = (popularPost) => {
 export const getPostComments = async article => {
     let comments = [];
 
-    const response = await fetch(`https://www.reddit.com/comments/${article}.json`);
+    const response = await fetch(ENDPOINTS.get('get_post_comments', article));
     const json = await response.json();
 
     comments = json[1].data.children.map(({ data }) => 
