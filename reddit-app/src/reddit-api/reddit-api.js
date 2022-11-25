@@ -1,3 +1,33 @@
+export const getPopularPosts = async () => {
+    const json = await fetchJSON('popular');
+    
+    return json.data.children.map(extractPostData);
+};
+
+export const searchPost = async term => {
+    const json = await fetchJSON('search_post', term);
+
+    return json.data.children.map(extractPostData);
+};
+
+export const getPost = async article => {
+    const json = await fetchJSON('get_post', article);
+
+    return extractPostData(json[0].data.children[0]);
+};
+
+export const getPostComments = async article => {
+    const json = await fetchJSON('get_post_comments', article);
+
+    return json[1].data.children.map(({ data }) => extractCommentData(data));
+};
+
+const fetchJSON = async (endpoint, ...values) => {
+    const response = await fetch(ENDPOINTS.get(endpoint, ...values));
+    
+    return await response.json();
+};
+
 const ENDPOINTS = {
     _base_url: 'https://www.reddit.com',
     
@@ -9,35 +39,6 @@ const ENDPOINTS = {
     get: function (endpoint, ...values) {
         return this._base_url + this[`_${endpoint}`](...values);
     }
-};
-
-export const getPopularPosts = async () => {
-    let posts = [];
-
-    const response = await fetch(ENDPOINTS.get('popular'));
-    const json = await response.json();
-
-    posts = json.data.children.map(extractPostData);
-
-    return posts;
-};
-
-export const searchPost = async term => {
-    let posts = [];
-
-    const response = await fetch(ENDPOINTS.get('search_post', term));
-    const json = await response.json();
-
-    posts = json.data.children.map(extractPostData);
-
-    return posts;
-};
-
-export const getPost = async article => {
-    const response = await fetch(ENDPOINTS.get('get_post', article));
-    const json = await response.json();
-
-    return extractPostData(json[0].data.children[0]);
 };
 
 const extractPostData = ({data}) => ({
@@ -80,18 +81,6 @@ const extractPopularPostBodyContent = (popularPost) => {
     }
 
     return { type, url };
-};
-
-export const getPostComments = async article => {
-    let comments = [];
-
-    const response = await fetch(ENDPOINTS.get('get_post_comments', article));
-    const json = await response.json();
-
-    comments = json[1].data.children.map(({ data }) => 
-        extractCommentData(data));
-
-    return comments;
 };
 
 const extractCommentData = data => ({
